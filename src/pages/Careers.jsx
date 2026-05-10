@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Briefcase, MapPin, Clock, ChevronRight, Search, Sparkles } from 'lucide-react';
 
-const API = 'http://localhost:5000/api';
+const API = `${import.meta.env.VITE_API_URL}/api`;
 
 const Careers = () => {
   const navigate = useNavigate();
