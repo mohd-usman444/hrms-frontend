@@ -31,7 +31,7 @@ const AdminAuth = () => {
         ? { email: formData.email, password: formData.password }
         : formData;
 
-      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}${endpoint}`, payload);
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL?.replace(/\/+$/, '')}${endpoint}`, payload);
       
       login(data, data.token);
       toast.success(isLogin ? 'Login successful!' : 'Admin registered successfully!');

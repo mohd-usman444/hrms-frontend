@@ -195,7 +195,7 @@ const CandidateDetails = () => {
               </div>
             </div>
             {candidate.resumePath && (
-              <a href={`${import.meta.env.VITE_API_URL}${candidate.resumePath}`} target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: '0.5rem 1rem', background: 'rgba(99,102,241,0.1)', color: 'var(--accent)', borderRadius: '6px', fontSize: '0.85rem', textAlign: 'center', marginTop: '0.5rem' }}>
+              <a href={`${import.meta.env.VITE_API_URL?.replace(/\/+$/, '')}${candidate.resumePath}`} target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: '0.5rem 1rem', background: 'rgba(99,102,241,0.1)', color: 'var(--accent)', borderRadius: '6px', fontSize: '0.85rem', textAlign: 'center', marginTop: '0.5rem' }}>
                 <Download size={16} /> Download Resume
               </a>
             )}

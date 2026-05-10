@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ArrowLeft, Upload, Briefcase, MapPin, Clock, Users, CheckCircle, Send } from 'lucide-react';
 
-const API = `${import.meta.env.VITE_API_URL}/api`;
+const API = `${import.meta.env.VITE_API_URL?.replace(/\/+$/, '')}/api`;
 
 const ApplyJob = () => {
   const { jobId } = useParams();
