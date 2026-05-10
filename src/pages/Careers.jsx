@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Briefcase, MapPin, Clock, ChevronRight, Search, Sparkles } from 'lucide-react';
 
-const API = `${import.meta.env.VITE_API_URL?.replace(/\/+$/, '')}/api`;
+const API = `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/+$/, '')}/api`;
 
 const Careers = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const Careers = () => {
         style={{
           background: 'linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.1) 50%, rgba(99,102,241,0.05) 100%)',
           borderBottom: '1px solid rgba(255,255,255,0.05)',
-          padding: '3rem 2rem 4rem',
+          padding: 'clamp(2rem, 5vw, 3rem) clamp(1rem, 3vw, 2rem)',
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
@@ -147,7 +147,7 @@ const Careers = () => {
       </div>
 
       {/* Job Listings */}
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2.5rem 1.5rem 4rem' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: 'clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 1.5rem)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: '600' }}>
             Open Positions

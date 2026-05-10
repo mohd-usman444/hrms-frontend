@@ -132,7 +132,7 @@
 /* Dashboard Cards */
 .stat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -217,8 +217,41 @@
   margin-bottom: 1rem;
 }
 
+/* Responsive Elements */
+.menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.sidebar-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+  .menu-btn {
+    display: flex;
+  }
+
   .sidebar {
     position: fixed;
     transform: translateX(-100%);
@@ -232,5 +265,17 @@
   
   .role-cards {
     grid-template-columns: 1fr;
+  }
+
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .top-header {
+    padding: 0 1rem;
+  }
+
+  .auth-card {
+    padding: 1.5rem;
   }
 }

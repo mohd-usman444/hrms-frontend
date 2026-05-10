@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { Users, Calendar, UserPlus, UserMinus, FileText, LogOut, Briefcase, UserCheck } from 'lucide-react';
+import { Users, Calendar, UserPlus, UserMinus, FileText, LogOut, Briefcase, UserCheck, Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const AdminLayout = () => {
   const { logout, adminUser: user } = useAuth();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navItems = [
     { path: '/admin/dashboard', icon: <Users size={20} />, label: 'Employee Data' },
@@ -17,7 +19,8 @@ const AdminLayout = () => {
 
   return (
     <div className="app-container">
-      <aside className="sidebar">
+      <div className={`sidebar-overlay ${isSidebarOpen ? 'open' : ''}`} onClick={() => setIsSidebarOpen(false)} />
+      <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <h2>Admin Panel</h2>
         </div>
@@ -28,6 +31,7 @@ const AdminLayout = () => {
               to={item.path}
               end={item.path === '/admin/dashboard'}
               className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              onClick={() => setIsSidebarOpen(false)}
             >
               {item.icon}
               <span>{item.label}</span>
@@ -53,7 +57,11 @@ const AdminLayout = () => {
 
       <main className="main-content">
         <header className="top-header">
-          <div></div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <button className="menu-btn" onClick={() => setIsSidebarOpen(true)}>
+              <Menu size={24} />
+            </button>
+          </div>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </div>

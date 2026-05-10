@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ArrowLeft, Upload, Briefcase, MapPin, Clock, Users, CheckCircle, Send } from 'lucide-react';
 
-const API = `${import.meta.env.VITE_API_URL?.replace(/\/+$/, '')}/api`;
+const API = `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/+$/, '')}/api`;
 
 const ApplyJob = () => {
   const { jobId } = useParams();
@@ -167,7 +167,7 @@ const ApplyJob = () => {
         style={{
           background: 'var(--bg-secondary)',
           borderBottom: '1px solid rgba(255,255,255,0.05)',
-          padding: '1rem 2rem',
+          padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem)',
           display: 'flex',
           alignItems: 'center',
           gap: '1rem',
@@ -190,16 +190,15 @@ const ApplyJob = () => {
         <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Back to all positions</span>
       </div>
 
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: 'clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '2rem' }}>
           {/* Job Details Card */}
           <div>
             <div
               className="glass"
               style={{
-                padding: '2rem',
-                position: 'sticky',
-                top: '2rem',
+                padding: 'clamp(1.5rem, 4vw, 2rem)',
+                position: 'relative',
               }}
             >
               <div
@@ -271,7 +270,7 @@ const ApplyJob = () => {
 
           {/* Application Form */}
           <div>
-            <div className="glass" style={{ padding: '2rem' }}>
+            <div className="glass" style={{ padding: 'clamp(1.5rem, 4vw, 2rem)' }}>
               <h2 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.25rem' }}>Apply for this Position</h2>
               <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>Fill out the form below. Fields marked * are required.</p>
 
@@ -303,7 +302,7 @@ const ApplyJob = () => {
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
                   <div className="form-group">
                     <label>Email *</label>
                     <input
