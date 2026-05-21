@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { Users } from 'lucide-react';
+import { Users, Eye, EyeOff } from 'lucide-react';
 
 const UserAuth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +15,7 @@ const UserAuth = () => {
     department: '',
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -111,14 +112,35 @@ const UserAuth = () => {
 
           <div className="form-group">
             <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              placeholder="••••••••"
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                className="password-toggle-btn"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
+            {isLogin && (
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                <span 
+                  style={{ color: 'var(--accent)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '500' }}
+                  onClick={() => navigate('/forgot-password?role=employee')}
+                  className="forgot-password-link"
+                >
+                  Forgot Password?
+                </span>
+              </div>
+            )}
           </div>
 
           <button 
@@ -131,14 +153,9 @@ const UserAuth = () => {
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '1.5rem', color: 'var(--text-secondary)' }}>
-          {isLogin ? "Don't have an account? " : "Already have an account? "}
-          <span 
-            style={{ color: 'var(--accent)', cursor: 'pointer' }}
-            onClick={() => setIsLogin(!isLogin)}
-          >
-            {isLogin ? 'Register' : 'Sign In'}
-          </span>
+        <div style={{ textAlign: 'center', marginTop: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.4' }}>
+          Employee accounts are created by administrator.<br />
+          Contact HR/Admin for account access.
         </div>
       </div>
     </div>

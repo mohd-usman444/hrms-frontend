@@ -6,6 +6,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import NotFound from './components/common/NotFound';
 import Landing from './pages/Landing';
+import ForgotPassword from './pages/ForgotPassword';
 
 // Admin Pages
 import AdminAuth from './pages/admin/AdminAuth';
@@ -47,6 +48,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/admin/signin" element={<AdminAuth />} />
           <Route path="/user/signin" element={<UserAuth />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/apply/:jobId" element={<ApplyJob />} />
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Eye, EyeOff } from 'lucide-react';
 
 const AdminAuth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,6 +14,8 @@ const AdminAuth = () => {
     adminSecretKey: '',
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showSecretKey, setShowSecretKey] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -83,27 +85,58 @@ const AdminAuth = () => {
 
           <div className="form-group">
             <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              placeholder="••••••••"
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                className="password-toggle-btn"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
+            {isLogin && (
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                <span 
+                  style={{ color: 'var(--accent)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '500' }}
+                  onClick={() => navigate('/forgot-password?role=admin')}
+                  className="forgot-password-link"
+                >
+                  Forgot Password?
+                </span>
+              </div>
+            )}
           </div>
 
           {!isLogin && (
             <div className="form-group">
               <label>Admin Secret Key</label>
-              <input
-                type="password"
-                name="adminSecretKey"
-                value={formData.adminSecretKey}
-                onChange={handleChange}
-                required
-                placeholder="Provided by IT"
-              />
+              <div className="password-input-container">
+                <input
+                  type={showSecretKey ? "text" : "password"}
+                  name="adminSecretKey"
+                  value={formData.adminSecretKey}
+                  onChange={handleChange}
+                  required
+                  placeholder="Provided by IT"
+                />
+                <button
+                  type="button"
+                  className="password-toggle-btn"
+                  onClick={() => setShowSecretKey(!showSecretKey)}
+                  aria-label={showSecretKey ? "Hide secret key" : "Show secret key"}
+                >
+                  {showSecretKey ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
           )}
 

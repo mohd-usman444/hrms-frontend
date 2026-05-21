@@ -279,3 +279,43 @@
     padding: 1.5rem;
   }
 }
+
+/* Password Visibility Toggle and Forgot Password Link */
+.password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-container input {
+  padding-right: 2.75rem !important; /* space for the eye icon button */
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none !important;
+  border: none !important;
+  color: var(--text-secondary) !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  transition: color 0.2s ease;
+  box-shadow: none !important;
+}
+
+.password-toggle-btn:hover {
+  color: var(--text-primary) !important;
+  transform: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.forgot-password-link:hover {
+  color: var(--accent-hover) !important;
+  text-decoration: underline;
+}
+
